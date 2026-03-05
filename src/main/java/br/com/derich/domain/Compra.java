@@ -24,6 +24,9 @@ public class Compra {
     @Column(nullable = false)
     private String nomeProduto;
 
+    @Column(nullable = false)
+    private String tipo;
+
     // Por padrão é nullable = true então não precisa escrever
     private String descricao;
 
@@ -31,4 +34,8 @@ public class Compra {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime data;
+
+    // Mês/ano de vencimento da fatura à qual esta compra está vinculada
+    @Column(nullable = false)
+    private String fatura;
 }
