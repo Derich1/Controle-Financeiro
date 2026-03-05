@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,19 +15,19 @@ public class Orcamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private UUID id;
+    private String id;
 
     private List<Compra> compras;
 
     @Column(nullable = false)
-    private BigDecimal totalMes;
+    private String mes;
 
     @Column(nullable = false)
     private BigDecimal salario;
 
-    // Valor do salário - totalMes
     @Column(nullable = false)
-    private BigDecimal saldoMes;
+    private BigDecimal totalGasto;
 
-
+    @Column(nullable = false)
+    private BigDecimal saldoDisponivel;
 }
