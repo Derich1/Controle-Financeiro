@@ -1,10 +1,9 @@
 package br.com.derich.service;
 
+import br.com.derich.domain.Compra;
 import br.com.derich.domain.Orcamento;
 import br.com.derich.repository.IOrcamentoRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class OrcamentoService {
@@ -15,8 +14,18 @@ public class OrcamentoService {
         return orcamentoRepository.save(orcamento);
     }
 
-//    public Orcamento editarOrcamento(Orcamento orcamento){
-//        orcamento = orcamentoRepository.findById(orcamento.getId())
-//                .orElseThrow();
-//    }
+    public Orcamento editarOrcamento(String id, Orcamento orcamento){
+        Orcamento orcamentoBancoDados = orcamentoRepository.findById(id)
+                .orElseThrow();
+        orcamentoBancoDados.setSalario(orcamento.getSalario());
+        orcamentoBancoDados.setTotalGasto(orcamento.getTotalGasto());
+        return orcamentoRepository.save(orcamentoBancoDados);
+    }
+
+    public Orcamento adicionarCompraNaListaCompras(String id, Compra compra){
+        Orcamento orcamento = orcamentoRepository.findById(id)
+                .orElseThrow();
+        orcamento.adicionarCompra(compra);
+        return orcamentoRepository.save(orcamento);
+    }
 }
