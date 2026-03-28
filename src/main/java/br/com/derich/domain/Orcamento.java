@@ -21,6 +21,8 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
 
+    // Cascade: quando altera orçamento também altera na tabela de compra
+    // MappedBy orcamento: relação com o campo Orcamento na entidade Compra
     @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Compra> compras;
 
@@ -70,6 +72,14 @@ public class Orcamento {
         Sim → Service
      */
     public void adicionarCompra(Compra compra){
+        /*
+         O owning side da relação é a entidade Compra, pois é ela que possui a FK (orcamento_id)
+         e, portanto, é o lado que o JPA considera ao sincronizar a relação com o banco de dados.
+         Apenas adicionar a compra na lista do orçamento não gera alteração no banco,
+         pois o lado @OneToMany (inverse side) é apenas um espelho da relação.
+         Ao setar o orçamento na compra, estamos de fato alterando o owning side,
+         o que faz com que o JPA gere o INSERT/UPDATE corretamente na FK.
+         */
         compra.setOrcamento(this);
         this.getCompras().add(compra);
     }
