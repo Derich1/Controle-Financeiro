@@ -21,6 +21,7 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
 
+    @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Compra> compras;
 
     @Column(nullable = false)

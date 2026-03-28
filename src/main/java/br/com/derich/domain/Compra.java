@@ -18,6 +18,10 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
 
+    @ManyToOne
+    @JoinColumn(name = "orcamento_id")
+    private Orcamento orcamento;
+
     @Column(nullable = false)
     private BigDecimal valor;
 
