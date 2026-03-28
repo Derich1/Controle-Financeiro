@@ -70,6 +70,7 @@ public class Orcamento {
         Sim → Service
      */
     public void adicionarCompra(Compra compra){
+        compra.setOrcamento(this);
         this.getCompras().add(compra);
     }
 }
