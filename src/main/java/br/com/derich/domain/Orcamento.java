@@ -36,6 +36,10 @@ public class Orcamento {
 
     private BigDecimal saldoDisponivel;
 
+    private BigDecimal gastoRecorrente;
+
+    private BigDecimal cartaoCredito;
+
     public BigDecimal getTotalGasto(){
         return this.getCompras().stream()
                 .map(Compra::getValor)
