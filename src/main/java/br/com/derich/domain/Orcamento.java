@@ -38,6 +38,7 @@ public class Orcamento {
 
     private BigDecimal gastoRecorrente;
 
+    // Ex.: Parcela de uma compra feita em meses anteriores
     private BigDecimal cartaoCredito;
 
     public BigDecimal getTotalGasto(){
