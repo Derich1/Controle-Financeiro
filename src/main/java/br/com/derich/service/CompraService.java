@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static br.com.derich.util.MergeUtils.mergeIfDifferent;
+
 @Service
 @RequiredArgsConstructor
 public class CompraService {
@@ -19,5 +21,15 @@ public class CompraService {
 
     public List<Compra> listarCompras(){
         return compraRepository.findAll();
+    }
+
+    public Compra alterarCompra(Compra compra){
+        Compra compraBanco = compraRepository.findById(compra.getId())
+                .orElseThrow();
+        boolean houveMudanca = mergeIfDifferent(compra, compraBanco);
+        if (houveMudanca){
+            return compraRepository.save(compraBanco);
+        }
+        return compraBanco;
     }
 }
