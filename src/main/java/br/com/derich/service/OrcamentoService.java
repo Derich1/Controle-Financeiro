@@ -6,6 +6,7 @@ import br.com.derich.repository.IOrcamentoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Month;
+import java.time.OffsetDateTime;
 
 @Service
 public class OrcamentoService {
@@ -33,5 +34,10 @@ public class OrcamentoService {
 
     public Orcamento mostrarOrcamentoMesEspecifico(Month mes){
         return orcamentoRepository.findByMonth(mes).orElseThrow();
+    }
+
+    public Orcamento mostrarOrcamentoMesAtual(){
+        OffsetDateTime offsetDate = OffsetDateTime.now();
+        return orcamentoRepository.findByMonth(offsetDate.getMonth()).orElseThrow();
     }
 }
