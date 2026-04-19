@@ -5,6 +5,8 @@ import br.com.derich.domain.Orcamento;
 import br.com.derich.repository.IOrcamentoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Month;
+
 @Service
 public class OrcamentoService {
 
@@ -27,5 +29,9 @@ public class OrcamentoService {
                 .orElseThrow();
         orcamento.adicionarCompra(compra);
         return orcamentoRepository.save(orcamento);
+    }
+
+    public Orcamento mostrarOrcamentoMesEspecifico(Month mes){
+        return orcamentoRepository.findByMonth(mes).orElseThrow();
     }
 }
