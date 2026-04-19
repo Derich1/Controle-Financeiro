@@ -4,6 +4,7 @@ import br.com.derich.domain.Orcamento;
 import br.com.derich.service.OrcamentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ public class OrcamentoController {
 
     private OrcamentoService orcamentoService;
 
+    @PostMapping
     public ResponseEntity<Orcamento> salvarOrcamento(Orcamento orcamento){
         Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(orcamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(orcamentoSalvo);
