@@ -1,6 +1,6 @@
 package br.com.derich.service;
 
-import br.com.derich.OrcamentoMapper;
+import br.com.derich.mapper.OrcamentoMapper;
 import br.com.derich.domain.Compra;
 import br.com.derich.domain.Orcamento;
 import br.com.derich.dto.OrcamentoRequestDTO;
