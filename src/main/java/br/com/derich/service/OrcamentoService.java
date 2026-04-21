@@ -1,7 +1,9 @@
 package br.com.derich.service;
 
+import br.com.derich.OrcamentoMapper;
 import br.com.derich.domain.Compra;
 import br.com.derich.domain.Orcamento;
+import br.com.derich.dto.OrcamentoRequestDTO;
 import br.com.derich.repository.IOrcamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,14 @@ import java.time.OffsetDateTime;
 public class OrcamentoService {
 
     private IOrcamentoRepository orcamentoRepository;
+    private final OrcamentoMapper orcamentoMapper;
 
-    public Orcamento salvarOrcamento(Orcamento orcamento){
+    public OrcamentoService(OrcamentoMapper orcamentoMapper) {
+        this.orcamentoMapper = orcamentoMapper;
+    }
+
+    public Orcamento salvarOrcamento(OrcamentoRequestDTO orcamentoDTO){
+        Orcamento orcamento = orcamentoMapper.toEntity(orcamentoDTO);
         return orcamentoRepository.save(orcamento);
     }
 
