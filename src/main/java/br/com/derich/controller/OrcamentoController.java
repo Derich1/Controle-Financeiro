@@ -1,11 +1,10 @@
 package br.com.derich.controller;
 
-import br.com.derich.domain.Orcamento;
+import br.com.derich.dto.CompraRequestDTO;
 import br.com.derich.dto.OrcamentoRequestDTO;
 import br.com.derich.dto.OrcamentoResponseDTO;
 import br.com.derich.service.OrcamentoService;
 import jakarta.validation.Valid;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +35,13 @@ public class OrcamentoController {
 
                 // Se o Optional tiver valor  → retorna o valor que estava dentro
                 // Se o Optional estiver vazio → retorna o 404 que você definiu
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/adicionarCompra")
+    public ResponseEntity<OrcamentoResponseDTO> adicionarCompraNaLista(CompraRequestDTO compraRequestDTO){
+        return orcamentoService.adicionarCompraNaListaCompras(compraRequestDTO)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 }
