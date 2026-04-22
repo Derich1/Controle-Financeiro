@@ -63,8 +63,9 @@ public class OrcamentoService {
                 .map(orcamentoMapper::toResponse);
     }
 
-    public Orcamento mostrarOrcamentoMesAtual() {
+    public Optional<OrcamentoResponseDTO> mostrarOrcamentoMesAtual() {
         OffsetDateTime offsetDate = OffsetDateTime.now();
-        return orcamentoRepository.findByMonth(offsetDate.getMonth()).orElseThrow();
+        return orcamentoRepository.findByMonth(offsetDate.getMonth())
+                .map(orcamentoMapper::toResponse);
     }
 }
