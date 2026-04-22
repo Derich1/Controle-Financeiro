@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Month;
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 @Service
 public class OrcamentoService {
@@ -27,12 +28,13 @@ public class OrcamentoService {
         return orcamentoMapper.toResponse(orcamentoSalvo);
     }
 
-    public Orcamento editarOrcamento(String id, Orcamento orcamento){
-        Orcamento orcamentoBancoDados = orcamentoRepository.findById(id)
-                .orElseThrow();
-        orcamentoBancoDados.setSalario(orcamento.getSalario());
-        orcamentoBancoDados.setTotalGasto(orcamento.getTotalGasto());
-        return orcamentoRepository.save(orcamentoBancoDados);
+    public Optional<OrcamentoResponseDTO> editarOrcamento(String id, OrcamentoRequestDTO dto){
+        return orcamentoRepository.findById(id)
+                .map(existente -> {
+                    existente.setSalario(dto.salario());
+                    Orcamento orcamentoSalvo = orcamentoRepository.save(existente);
+                    return orcamentoMapper.toResponse(orcamentoSalvo);
+                });
     }
 
     public Orcamento adicionarCompraNaListaCompras(String id, Compra compra){
