@@ -26,10 +26,16 @@ public class OrcamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(orcamentoSalvo);
     }
 
+    // Optional obriga a tratar caso de falha em tempo de compilação
     @PutMapping("/{id}")
     public ResponseEntity<OrcamentoResponseDTO> editarOrcamento(@PathVariable String id, @RequestBody @Valid OrcamentoRequestDTO dto){
         return orcamentoService.editarOrcamento(id, dto)
+                // Se o Optional tiver valor  → transforma OrcamentoResponseDTO em ResponseEntity 200
+                // Se o Optional estiver vazio → não faz nada, propaga o vazio
                 .map(ResponseEntity::ok)
+
+                // Se o Optional tiver valor  → retorna o valor que estava dentro
+                // Se o Optional estiver vazio → retorna o 404 que você definiu
                 .orElse(ResponseEntity.notFound().build());
     }
 }
