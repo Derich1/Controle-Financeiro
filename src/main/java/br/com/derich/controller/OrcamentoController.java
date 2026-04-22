@@ -53,4 +53,11 @@ public class OrcamentoController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/mes/atual")
+    public ResponseEntity<OrcamentoResponseDTO> mostrarOrcamentoMesAtual(){
+        return orcamentoService.mostrarOrcamentoMesAtual()
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
