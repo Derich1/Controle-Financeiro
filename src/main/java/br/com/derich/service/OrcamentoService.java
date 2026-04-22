@@ -28,8 +28,15 @@ public class OrcamentoService {
         return orcamentoMapper.toResponse(orcamentoSalvo);
     }
 
+    /*
+    Utilizando Optional é mais seguro que utilizar entidade diretamente, pois te obriga
+    a tratar os casos de sucesso e de falha na busca em tempo de compilação
+
+    O map precisa de menos linhas para tratar o Optional
+     */
     public Optional<OrcamentoResponseDTO> editarOrcamento(String id, OrcamentoRequestDTO dto){
         return orcamentoRepository.findById(id)
+                // caso não encontrado no banco de dados ele ignora o map e retorna um Optional.empty()
                 .map(existente -> {
                     existente.setSalario(dto.salario());
                     Orcamento orcamentoSalvo = orcamentoRepository.save(existente);
