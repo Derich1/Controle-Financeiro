@@ -1,5 +1,6 @@
 package br.com.derich.service;
 
+import br.com.derich.dto.OrcamentoResponseDTO;
 import br.com.derich.mapper.OrcamentoMapper;
 import br.com.derich.domain.Compra;
 import br.com.derich.domain.Orcamento;
@@ -20,9 +21,10 @@ public class OrcamentoService {
         this.orcamentoMapper = orcamentoMapper;
     }
 
-    public Orcamento salvarOrcamento(OrcamentoRequestDTO orcamentoDTO){
+    public OrcamentoResponseDTO salvarOrcamento(OrcamentoRequestDTO orcamentoDTO){
         Orcamento orcamento = orcamentoMapper.toEntity(orcamentoDTO);
-        return orcamentoRepository.save(orcamento);
+        Orcamento orcamentoSalvo = orcamentoRepository.save(orcamento);
+        return orcamentoMapper.toResponse(orcamentoSalvo);
     }
 
     public Orcamento editarOrcamento(String id, Orcamento orcamento){
