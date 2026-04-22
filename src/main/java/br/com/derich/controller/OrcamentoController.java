@@ -17,6 +17,10 @@ public class OrcamentoController {
 
     private OrcamentoService orcamentoService;
 
+    public OrcamentoController(OrcamentoService orcamentoService){
+        this.orcamentoService = orcamentoService;
+    }
+
     @PostMapping
     public ResponseEntity<Orcamento> salvarOrcamento(@RequestBody @Valid OrcamentoRequestDTO orcamento){
         Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(orcamento);
