@@ -27,6 +27,8 @@ public class Orcamento {
     @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Compra> compras;
 
+    // Anotação para JPA entender o tipo Month e salvar como uma String
+    // Ex.: "JANUARY"
     @Enumerated(EnumType.STRING)
     private Month mes;
 
