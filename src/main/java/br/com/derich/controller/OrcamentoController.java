@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Month;
+
 @RestController
 @RequestMapping("/api/v1/orcamento")
 public class OrcamentoController {
@@ -41,6 +43,13 @@ public class OrcamentoController {
     @PostMapping("/adicionarCompra")
     public ResponseEntity<OrcamentoResponseDTO> adicionarCompraNaLista(CompraRequestDTO compraRequestDTO){
         return orcamentoService.adicionarCompraNaListaCompras(compraRequestDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/mes/{mes}")
+    public ResponseEntity<OrcamentoResponseDTO> mostrarOrcamentoMesEspecifico(@PathVariable Month mes){
+        return orcamentoService.mostrarOrcamentoMesEspecifico(mes)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
