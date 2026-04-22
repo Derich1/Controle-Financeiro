@@ -2,6 +2,7 @@ package br.com.derich.controller;
 
 import br.com.derich.domain.Orcamento;
 import br.com.derich.dto.OrcamentoRequestDTO;
+import br.com.derich.dto.OrcamentoResponseDTO;
 import br.com.derich.service.OrcamentoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,8 @@ public class OrcamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<Orcamento> salvarOrcamento(@RequestBody @Valid OrcamentoRequestDTO orcamento){
-        Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(orcamento);
+    public ResponseEntity<OrcamentoResponseDTO> salvarOrcamento(@RequestBody @Valid OrcamentoRequestDTO orcamento){
+        OrcamentoResponseDTO orcamentoSalvo = orcamentoService.salvarOrcamento(orcamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(orcamentoSalvo);
     }
 }
