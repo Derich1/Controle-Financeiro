@@ -1,6 +1,8 @@
 package br.com.derich.service;
 
+import br.com.derich.dto.CompraRequestDTO;
 import br.com.derich.dto.OrcamentoResponseDTO;
+import br.com.derich.mapper.CompraMapper;
 import br.com.derich.mapper.OrcamentoMapper;
 import br.com.derich.domain.Compra;
 import br.com.derich.domain.Orcamento;
@@ -17,9 +19,11 @@ public class OrcamentoService {
 
     private IOrcamentoRepository orcamentoRepository;
     private final OrcamentoMapper orcamentoMapper;
+    private final CompraMapper compraMapper;
 
-    public OrcamentoService(OrcamentoMapper orcamentoMapper) {
+    public OrcamentoService(OrcamentoMapper orcamentoMapper, CompraMapper compraMapper) {
         this.orcamentoMapper = orcamentoMapper;
+        this.compraMapper = compraMapper;
     }
 
     public OrcamentoResponseDTO salvarOrcamento(OrcamentoRequestDTO orcamentoDTO){
@@ -44,11 +48,14 @@ public class OrcamentoService {
                 });
     }
 
-    public Orcamento adicionarCompraNaListaCompras(String id, Compra compra){
-        Orcamento orcamento = orcamentoRepository.findById(id)
-                .orElseThrow();
-        orcamento.adicionarCompra(compra);
-        return orcamentoRepository.save(orcamento);
+    public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(String id, CompraRequestDTO dto){
+        return orcamentoRepository.findById(id)
+                .map(existente -> {
+                    Compra compra = compraMapper.toEntity(dto);
+                    existente.adicionarCompra(compra);
+                    Orcamento orcamentoSalvo = orcamentoRepository.save(existente);
+                    return orcamentoMapper.toResponse(orcamentoSalvo);
+                });
     }
 
     public Orcamento mostrarOrcamentoMesEspecifico(Month mes){
