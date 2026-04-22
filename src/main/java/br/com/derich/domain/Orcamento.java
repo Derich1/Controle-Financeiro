@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.Month;
 import java.util.List;
 
 /*
@@ -26,8 +27,8 @@ public class Orcamento {
     @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Compra> compras;
 
-    @Column(nullable = false)
-    private String mes;
+    @Enumerated(EnumType.STRING)
+    private Month mes;
 
     @Column(nullable = false)
     private BigDecimal salario;
