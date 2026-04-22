@@ -26,7 +26,7 @@ public class OrcamentoService {
         this.compraMapper = compraMapper;
     }
 
-    public OrcamentoResponseDTO salvarOrcamento(OrcamentoRequestDTO orcamentoDTO){
+    public OrcamentoResponseDTO salvarOrcamento(OrcamentoRequestDTO orcamentoDTO) {
         Orcamento orcamento = orcamentoMapper.toEntity(orcamentoDTO);
         Orcamento orcamentoSalvo = orcamentoRepository.save(orcamento);
         return orcamentoMapper.toResponse(orcamentoSalvo);
@@ -38,7 +38,7 @@ public class OrcamentoService {
 
     O map precisa de menos linhas para tratar o Optional
      */
-    public Optional<OrcamentoResponseDTO> editarOrcamento(String id, OrcamentoRequestDTO dto){
+    public Optional<OrcamentoResponseDTO> editarOrcamento(String id, OrcamentoRequestDTO dto) {
         return orcamentoRepository.findById(id)
                 // caso não encontrado no banco de dados ele ignora o map e retorna um Optional.empty()
                 .map(existente -> {
@@ -48,7 +48,7 @@ public class OrcamentoService {
                 });
     }
 
-    public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(CompraRequestDTO dto){
+    public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(CompraRequestDTO dto) {
         return orcamentoRepository.findById(dto.orcamento().getId())
                 .map(existente -> {
                     Compra compra = compraMapper.toEntity(dto);
@@ -58,11 +58,12 @@ public class OrcamentoService {
                 });
     }
 
-    public Orcamento mostrarOrcamentoMesEspecifico(Month mes){
-        return orcamentoRepository.findByMonth(mes).orElseThrow();
+    public Optional<OrcamentoResponseDTO> mostrarOrcamentoMesEspecifico(Month mes) {
+        return orcamentoRepository.findByMonth(mes)
+                .map(orcamentoMapper::toResponse);
     }
 
-    public Orcamento mostrarOrcamentoMesAtual(){
+    public Orcamento mostrarOrcamentoMesAtual() {
         OffsetDateTime offsetDate = OffsetDateTime.now();
         return orcamentoRepository.findByMonth(offsetDate.getMonth()).orElseThrow();
     }
