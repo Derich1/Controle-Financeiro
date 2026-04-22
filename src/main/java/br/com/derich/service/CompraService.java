@@ -13,7 +13,11 @@ import static br.com.derich.util.MergeUtils.mergeIfDifferent;
 @RequiredArgsConstructor
 public class CompraService {
 
-    public static ICompraRepository compraRepository;
+    public ICompraRepository compraRepository;
+
+    public CompraService(ICompraRepository compraRepository){
+        this.compraRepository = compraRepository;
+    }
 
     public Compra salvarCompra(Compra compra) {
         return compraRepository.save(compra);
