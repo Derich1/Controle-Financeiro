@@ -1,6 +1,6 @@
 package br.com.derich.controller;
 
-import br.com.derich.dto.CompraRequestDTO;
+import br.com.derich.dto.CompraDTO;
 import br.com.derich.dto.OrcamentoRequestDTO;
 import br.com.derich.dto.OrcamentoResponseDTO;
 import br.com.derich.service.OrcamentoService;
@@ -41,8 +41,8 @@ public class OrcamentoController {
     }
 
     @PostMapping("/adicionarCompra")
-    public ResponseEntity<OrcamentoResponseDTO> adicionarCompraNaLista(CompraRequestDTO compraRequestDTO){
-        return orcamentoService.adicionarCompraNaListaCompras(compraRequestDTO)
+    public ResponseEntity<OrcamentoResponseDTO> adicionarCompraNaLista(CompraDTO compraDTO){
+        return orcamentoService.adicionarCompraNaListaCompras(compraDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
