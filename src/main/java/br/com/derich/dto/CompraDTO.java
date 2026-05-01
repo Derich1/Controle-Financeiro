@@ -5,7 +5,7 @@ import br.com.derich.domain.Orcamento;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record CompraRequestDTO(
+public record CompraDTO(
         Orcamento orcamento,
         BigDecimal valor,
         String nomeProduto,
