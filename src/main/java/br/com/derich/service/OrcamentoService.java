@@ -1,6 +1,6 @@
 package br.com.derich.service;
 
-import br.com.derich.dto.CompraRequestDTO;
+import br.com.derich.dto.CompraDTO;
 import br.com.derich.dto.OrcamentoResponseDTO;
 import br.com.derich.mapper.CompraMapper;
 import br.com.derich.mapper.OrcamentoMapper;
@@ -48,7 +48,7 @@ public class OrcamentoService {
                 });
     }
 
-    public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(CompraRequestDTO dto) {
+    public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(CompraDTO dto) {
         return orcamentoRepository.findById(dto.orcamento().getId())
                 .map(existente -> {
                     Compra compra = compraMapper.toEntity(dto);
