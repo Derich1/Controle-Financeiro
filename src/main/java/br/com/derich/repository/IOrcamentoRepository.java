@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface IOrcamentoRepository extends JpaRepository<Orcamento, String> {
 
-    Optional<Orcamento> findByMonth(Month mes);
+    Optional<Orcamento> findByMes(Month mes);
 }
