@@ -59,13 +59,13 @@ public class OrcamentoService {
     }
 
     public Optional<OrcamentoResponseDTO> mostrarOrcamentoMesEspecifico(Month mes) {
-        return orcamentoRepository.findByMonth(mes)
+        return orcamentoRepository.findByMes(mes)
                 .map(orcamentoMapper::toResponse);
     }
 
     public Optional<OrcamentoResponseDTO> mostrarOrcamentoMesAtual() {
         OffsetDateTime offsetDate = OffsetDateTime.now();
-        return orcamentoRepository.findByMonth(offsetDate.getMonth())
+        return orcamentoRepository.findByMes(offsetDate.getMonth())
                 .map(orcamentoMapper::toResponse);
     }
 }
