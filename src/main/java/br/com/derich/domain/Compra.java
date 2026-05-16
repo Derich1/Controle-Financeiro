@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 public class Compra {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
@@ -34,12 +34,15 @@ public class Compra {
     // Por padrão é nullable = true então não precisa escrever
     private String descricao;
 
-    // Hibernate cria automaticamente no momento da criação de cada documento
-    @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private LocalDateTime data;
+    private LocalDate data;
 
     // Mês/ano de vencimento da fatura à qual esta compra está vinculada
     @Column(nullable = false)
     private String fatura;
+
+    @PrePersist
+    public void prePersist() {
+        this.data = LocalDate.now();
+    }
 }
