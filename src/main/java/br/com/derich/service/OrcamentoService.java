@@ -49,7 +49,7 @@ public class OrcamentoService {
     }
 
     public Optional<OrcamentoResponseDTO> adicionarCompraNaListaCompras(CompraDTO dto) {
-        return orcamentoRepository.findById(dto.orcamento().getId())
+        return orcamentoRepository.findById(dto.orcamentoId())
                 .map(existente -> {
                     Compra compra = compraMapper.toEntity(dto);
                     existente.adicionarCompra(compra);
