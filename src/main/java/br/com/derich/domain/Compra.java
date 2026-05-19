@@ -32,6 +32,9 @@ public class Compra {
     @Column(nullable = false)
     private String tipo;
 
+    @Column(nullable = false)
+    private Integer quantidade;
+
     // Por padrão é nullable = true então não precisa escrever
     private String descricao;
 
