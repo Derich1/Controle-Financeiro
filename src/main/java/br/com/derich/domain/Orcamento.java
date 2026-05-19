@@ -1,8 +1,7 @@
 package br.com.derich.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Month;
@@ -14,6 +13,9 @@ por isso o getSaldoDisponivel pode ser declarado sem gerar conflitos com a anota
  */
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "orcamento")
 public class Orcamento {
