@@ -1,16 +1,18 @@
 package br.com.derich.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "compra")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Compra {
 
     @Id
