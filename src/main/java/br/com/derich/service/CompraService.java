@@ -31,13 +31,13 @@ public class CompraService {
         return compraRepository.findAll();
     }
 
-    public Compra alterarCompra(Compra compra){
-        Compra compraBanco = compraRepository.findById(compra.getId())
+    public CompraDTO alterarCompra(Long id, CompraDTO dto){
+        Compra compraBanco = compraRepository.findById(id)
                 .orElseThrow();
-        boolean houveMudanca = mergeIfDifferent(compra, compraBanco);
+        boolean houveMudanca = mergeIfDifferent(dto, compraBanco);
         if (houveMudanca){
-            return compraRepository.save(compraBanco);
+            compraBanco = compraRepository.save(compraBanco);
         }
-        return compraBanco;
+        return compraMapper.toDTO(compraBanco);
     }
 }
