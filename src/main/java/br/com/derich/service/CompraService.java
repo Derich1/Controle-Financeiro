@@ -4,6 +4,7 @@ import br.com.derich.domain.Compra;
 import br.com.derich.dto.CompraDTO;
 import br.com.derich.mapper.CompraMapper;
 import br.com.derich.repository.ICompraRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,5 +40,10 @@ public class CompraService {
             compraBanco = compraRepository.save(compraBanco);
         }
         return compraMapper.toDTO(compraBanco);
+    }
+
+    @Transactional
+    public void deletarCompra(Long id){
+        compraRepository.deleteById(id);
     }
 }
