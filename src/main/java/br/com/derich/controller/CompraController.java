@@ -39,4 +39,10 @@ public class CompraController {
         CompraDTO dtoSalvo = compraService.alterarCompra(id, dto);
         return ResponseEntity.ok(dtoSalvo);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCompra(@PathVariable Long id){
+        compraService.deletarCompra(id);
+        return ResponseEntity.noContent().build();
+    }
 }
