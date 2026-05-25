@@ -3,6 +3,7 @@ package br.com.derich.controller;
 import br.com.derich.dto.CompraDTO;
 import br.com.derich.mapper.CompraMapper;
 import br.com.derich.service.CompraService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +32,11 @@ public class CompraController {
     public ResponseEntity<List<CompraDTO>> listarCompras(){
         List<CompraDTO> comprasDTO = compraMapper.toDTOList(compraService.listarCompras());
         return ResponseEntity.ok(comprasDTO);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CompraDTO> alterarCompra(@PathVariable Long id, @RequestBody @Valid CompraDTO dto){
+        CompraDTO dtoSalvo = compraService.alterarCompra(id, dto);
+        return ResponseEntity.ok(dtoSalvo);
     }
 }
