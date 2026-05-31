@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -27,7 +28,7 @@ public class Orcamento {
     // Cascade: quando altera orçamento também altera na tabela de compra
     // MappedBy orcamento: relação com o campo Orcamento na entidade Compra
     @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Compra> compras;
+    private List<Compra> compras = new ArrayList<>();
 
     // Anotação para JPA entender o tipo Month e salvar como uma String
     // Ex.: "JANUARY"
