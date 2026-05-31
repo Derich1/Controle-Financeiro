@@ -35,5 +35,16 @@ services:
       postgres:
         condition: service_healthy
 
+  frontend:
+    build:
+      context: ./controle-financeiro-frontend
+      dockerfile: Dockerfile
+    container_name: controle-financeiro-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
 volumes:
   postgres_data:
