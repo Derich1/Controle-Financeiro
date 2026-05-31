@@ -21,7 +21,7 @@ por isso o getSaldoDisponivel pode ser declarado sem gerar conflitos com a anota
 public class Orcamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     // Cascade: quando altera orçamento também altera na tabela de compra
@@ -36,10 +36,6 @@ public class Orcamento {
 
     @Column(nullable = false)
     private BigDecimal salario;
-
-    private BigDecimal totalGasto;
-
-    private BigDecimal saldoDisponivel;
 
     private BigDecimal gastoRecorrente;
 
@@ -58,7 +54,7 @@ public class Orcamento {
      * ao invés de ficar salvando no banco de dados sempre que algum desses outros campos for alterado
      */
     public BigDecimal getSaldoDisponivel() {
-        return salario.subtract(totalGasto);
+        return salario.subtract(getTotalGasto());
     }
 
     /*
