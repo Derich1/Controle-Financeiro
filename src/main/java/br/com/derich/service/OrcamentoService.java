@@ -21,7 +21,8 @@ public class OrcamentoService {
     private final OrcamentoMapper orcamentoMapper;
     private final CompraMapper compraMapper;
 
-    public OrcamentoService(OrcamentoMapper orcamentoMapper, CompraMapper compraMapper) {
+    public OrcamentoService(IOrcamentoRepository orcamentoRepository, OrcamentoMapper orcamentoMapper, CompraMapper compraMapper) {
+        this.orcamentoRepository = orcamentoRepository;
         this.orcamentoMapper = orcamentoMapper;
         this.compraMapper = compraMapper;
     }
